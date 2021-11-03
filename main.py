@@ -21,7 +21,7 @@ def iniciar_jogo():
                     )
             tem_palavra_completada = palavra_correta == palavra_ocultada
             if tem_palavra_completada:
-                mostrar_mensagem_de_jogo_ganho()
+                mostrar_mensagem_de_jogo_ganho(palavra_correta)
                 tem_jogo_em_andamento = False
         else:
             numero_de_erros += 1
@@ -109,8 +109,10 @@ def obter_formas_da_letra_com_acentos(letra):
 def mostrar_mensagem_de_jogo_perdido():
     pass
 
-def mostrar_mensagem_de_jogo_ganho():
-    pass
+def mostrar_mensagem_de_jogo_ganho(palavra_correta):
+    mensagem_de_vitoria = ("\nVocê ganhou o jogo.\nA palavra é "
+            + "\"" + str(palavra_correta) + "\"" + "." + "\n")
+    print(mensagem_de_vitoria)
 
 deci = input("Deseja iniciar o jogo?[sim/nao]").lower()
 if deci == "sim":
