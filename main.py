@@ -1,3 +1,5 @@
+from palavrasDB import palavras
+import random
 numero_maximo_de_erros = 7
 def iniciar_jogo():
     palavra_correta = obter_palavra_aleatoria()
@@ -27,8 +29,9 @@ def iniciar_jogo():
                 mostrar_mensagem_de_jogo_perdido()
                 tem_jogo_em_andamento = False
 
-def obter_palavra_aleatoria():
-    pass
+def obter_palavra_aleatoria(lista_palavras):
+    # Retorna uma palavra aleatória da lista, sem capitalização
+    return lista_palavras[random.randint(0, len(lista_palavras) - 1)].lower()
 
 def mostrar_palavra_ocultada(palavra_ocultada):
     pass
