@@ -7,11 +7,17 @@ def iniciar_jogo():
     comprimento_da_palavra = len(palavra_correta)
     palavra_ocultada = "_" * comprimento_da_palavra
     numero_de_erros = 0
+    letras_inseridas = []
 
     tem_jogo_em_andamento = True
     while tem_jogo_em_andamento:
-        atualizar_tela_do_jogo(palavra_ocultada, numero_de_erros)
+        atualizar_tela_do_jogo(
+                palavra_ocultada,
+                numero_de_erros,
+                letras_inseridas
+                )
         letra = obter_letra_do_usuario()
+        letras_inseridas.append(letra)
         tem_acerto = verificar_acerto(letra, palavra_correta)
         if tem_acerto == "acerto":
             palavra_ocultada = revelar_letra(
@@ -33,7 +39,11 @@ def obter_palavra_aleatoria(lista_palavras):
     # Retorna uma palavra aleatória da lista, sem capitalização
     return lista_palavras[random.randint(0, len(lista_palavras) - 1)].lower()
 
-def atualizar_tela_do_jogo(palavra_ocultada, numero_de_erros):
+def atualizar_tela_do_jogo(
+        palavra_ocultada,
+        numero_de_erros,
+        letras_inseridas
+        ):
     print("\n" * 2)
     forca(numero_de_erros)
     print("\n")
@@ -43,6 +53,8 @@ def atualizar_tela_do_jogo(palavra_ocultada, numero_de_erros):
             + str(numero_de_erros) + "/" + str(numero_maximo_de_erros)
             )
     print(linha_com_numero_de_erros)
+    linha_com_letras_inseridas = "Chutes:   " + " ".join(letras_inseridas)
+    print(linha_com_letras_inseridas)
 
 def obter_letra_do_usuario():
     letra_user = input('Digite uma letra: ').strip().lower()
