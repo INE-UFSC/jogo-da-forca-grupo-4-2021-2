@@ -47,21 +47,46 @@ def verificar_acerto(letra, palavra_correta):
 
 def revelar_letra(letra, palavra_ocultada, palavra_correta):
     nova_palavra_ocultada = palavra_ocultada
-    indice_de_inicio = 0
-    tem_letras_para_mostrar = True
+    formas_da_letra_com_acentos = obter_formas_da_letra_com_acentos(letra)
 
-    while tem_letras_para_mostrar:
-        indice_da_letra = palavra_correta.find(letra, indice_de_inicio)
-        if indice_da_letra == -1:
-            tem_letras_para_mostrar = False
-        else:
-            nova_palavra_ocultada = (
-                    nova_palavra_ocultada[0:indice_da_letra]
-                    + letra
-                    + nova_palavra_ocultada[indice_da_letra + 1:]
+    for letra_com_acento in formas_da_letra_com_acentos:
+        indice_de_inicio = 0
+        tem_letras_para_mostrar = True
+        while tem_letras_para_mostrar:
+            indice_da_letra = palavra_correta.find(
+                    letra_com_acento,
+                    indice_de_inicio
                     )
-            indice_de_inicio = indice_da_letra + 1
+            if indice_da_letra == -1:
+                tem_letras_para_mostrar = False
+            else:
+                nova_palavra_ocultada = (
+                        nova_palavra_ocultada[0:indice_da_letra]
+                        + letra_com_acento
+                        + nova_palavra_ocultada[indice_da_letra + 1:]
+                        )
+                indice_de_inicio = indice_da_letra + 1
     return nova_palavra_ocultada
+
+def obter_formas_da_letra_com_acentos(letra):
+    formas = [letra]
+    formas_somente_com_acentos = []
+
+    if letra == "a":
+        formas_somente_com_acentos = ["á", "à", "ã", "â"]
+    elif letra == "e":
+        formas_somente_com_acentos = ["é", "ê"]
+    elif letra == "i":
+        formas_somente_com_acentos = ["í"]
+    elif letra == "o":
+        formas_somente_com_acentos = ["ó", "õ", "ô"]
+    elif letra == "u":
+        formas_somente_com_acentos = ["ú"]
+    elif letra == "c":
+        formas_somente_com_acentos = ["ç"]
+
+    formas.extend(formas_somente_com_acentos)
+    return formas
 
 def mostrar_mensagem_de_jogo_perdido():
     pass
