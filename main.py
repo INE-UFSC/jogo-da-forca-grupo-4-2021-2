@@ -1,8 +1,9 @@
 from palavrasDB import palavras
+from imagem_forca import forca
 import random
 numero_maximo_de_erros = 7
 def iniciar_jogo():
-    palavra_correta = obter_palavra_aleatoria()
+    palavra_correta = obter_palavra_aleatoria(palavras)
     comprimento_da_palavra = len(palavra_correta)
     palavra_ocultada = "_" * comprimento_da_palavra
     numero_de_erros = 0
@@ -13,18 +14,20 @@ def iniciar_jogo():
         mostrar_numero_de_erros(numero_de_erros)
         letra = obter_letra_do_usuario()
         tem_acerto = verificar_acerto(letra, palavra_correta)
-        if tem_acerto:
+        if tem_acerto == "acerto":
             palavra_ocultada = revelar_letra(
                     letra,
                     palavra_ocultada,
                     palavra_correta
                     )
+            print(palavra_ocultada)
             tem_palavra_completada = palavra_correta == palavra_ocultada
             if tem_palavra_completada:
                 mostrar_mensagem_de_jogo_ganho()
                 tem_jogo_em_andamento = False
         else:
             numero_de_erros += 1
+            forca(numero_de_erros)
             if numero_de_erros > numero_maximo_de_erros:
                 mostrar_mensagem_de_jogo_perdido()
                 tem_jogo_em_andamento = False
@@ -47,7 +50,16 @@ def obter_letra_do_usuario():
     return letra_user
 
 def verificar_acerto(letra, palavra_correta):
-    pass
+    letra = letra
+    palavra_correta = palavra_correta
+    output = ""
+    lista_palavra_correta = []
+    for x in palavra_correta:
+        lista_palavra_correta.append(x)
+    for q in lista_palavra_correta:
+        if letra == q:
+            output = "acerto"
+    return output
 
 def revelar_letra(letra, palavra_ocultada, palavra_correta):
     nova_palavra_ocultada = palavra_ocultada
@@ -97,4 +109,8 @@ def mostrar_mensagem_de_jogo_perdido():
 
 def mostrar_mensagem_de_jogo_ganho():
     pass
+
+deci = input("Deseja iniciar o jogo?[sim/nao]").lower()
+if deci == "sim":
+    iniciar_jogo()
 
