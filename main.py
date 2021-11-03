@@ -43,7 +43,22 @@ def verificar_acerto(letra, palavra_correta):
     pass
 
 def revelar_letra(letra, palavra_ocultada, palavra_correta):
-    pass
+    nova_palavra_ocultada = palavra_ocultada
+    indice_de_inicio = 0
+    tem_letras_para_mostrar = True
+
+    while tem_letras_para_mostrar:
+        indice_da_letra = palavra_correta.find(letra, indice_de_inicio)
+        if indice_da_letra == -1:
+            tem_letras_para_mostrar = False
+        else:
+            nova_palavra_ocultada = (
+                    nova_palavra_ocultada[0:indice_da_letra]
+                    + letra
+                    + nova_palavra_ocultada[indice_da_letra + 1:]
+                    )
+            indice_de_inicio = indice_da_letra + 1
+    return nova_palavra_ocultada
 
 def mostrar_mensagem_de_jogo_perdido():
     pass
