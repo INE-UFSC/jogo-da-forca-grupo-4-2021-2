@@ -10,8 +10,7 @@ def iniciar_jogo():
 
     tem_jogo_em_andamento = True
     while tem_jogo_em_andamento:
-        mostrar_palavra_ocultada(palavra_ocultada)
-        mostrar_numero_de_erros(numero_de_erros)
+        atualizar_tela_do_jogo(palavra_ocultada, numero_de_erros)
         letra = obter_letra_do_usuario()
         tem_acerto = verificar_acerto(letra, palavra_correta)
         if tem_acerto == "acerto":
@@ -20,14 +19,12 @@ def iniciar_jogo():
                     palavra_ocultada,
                     palavra_correta
                     )
-            print(palavra_ocultada)
             tem_palavra_completada = palavra_correta == palavra_ocultada
             if tem_palavra_completada:
                 mostrar_mensagem_de_jogo_ganho()
                 tem_jogo_em_andamento = False
         else:
             numero_de_erros += 1
-            forca(numero_de_erros)
             if numero_de_erros > numero_maximo_de_erros:
                 mostrar_mensagem_de_jogo_perdido()
                 tem_jogo_em_andamento = False
@@ -36,11 +33,16 @@ def obter_palavra_aleatoria(lista_palavras):
     # Retorna uma palavra aleatória da lista, sem capitalização
     return lista_palavras[random.randint(0, len(lista_palavras) - 1)].lower()
 
-def mostrar_palavra_ocultada(palavra_ocultada):
-    pass
-
-def mostrar_numero_de_erros(numero_de_erros):
-    pass
+def atualizar_tela_do_jogo(palavra_ocultada, numero_de_erros):
+    print("\n" * 2)
+    forca(numero_de_erros)
+    print("\n")
+    print("Palavra:  " + palavra_ocultada)
+    linha_com_numero_de_erros = (
+            "Erros:    "
+            + str(numero_de_erros) + "/" + str(numero_maximo_de_erros)
+            )
+    print(linha_com_numero_de_erros)
 
 def obter_letra_do_usuario():
     letra_user = input('Digite uma letra: ').strip().lower()
