@@ -40,7 +40,11 @@ def mostrar_numero_de_erros(numero_de_erros):
     pass
 
 def obter_letra_do_usuario():
-    pass
+    letra_user = input('Digite uma letra: ').strip().lower()
+    while len(letra_user) != 1 or not letra_user.isalpha():
+        letra_user = input('Valor não aceito, tente novamente.\n'
+                           'Digite uma letra: ').strip().lower()
+    return letra_user
 
 def verificar_acerto(letra, palavra_correta):
     pass
