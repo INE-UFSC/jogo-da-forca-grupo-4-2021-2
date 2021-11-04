@@ -1,7 +1,7 @@
 from palavrasDB import palavras
 from imagem_forca import forca
 import random
-numero_maximo_de_erros = 7
+numero_de_erros_para_perder = 6
 def iniciar_jogo():
     palavra_correta = obter_palavra_aleatoria(palavras)
     comprimento_da_palavra = len(palavra_correta)
@@ -31,8 +31,12 @@ def iniciar_jogo():
                 tem_jogo_em_andamento = False
         else:
             numero_de_erros += 1
-            if numero_de_erros > numero_maximo_de_erros:
-                mostrar_mensagem_de_jogo_perdido()
+            if numero_de_erros >= numero_de_erros_para_perder:
+                atualizar_tela_do_jogo(
+                        palavra_ocultada,
+                        numero_de_erros,
+                        letras_inseridas
+                        )
                 tem_jogo_em_andamento = False
 
 def obter_palavra_aleatoria(lista_palavras):
@@ -50,7 +54,7 @@ def atualizar_tela_do_jogo(
     print("Palavra:  " + palavra_ocultada)
     linha_com_numero_de_erros = (
             "Erros:    "
-            + str(numero_de_erros) + "/" + str(numero_maximo_de_erros)
+            + str(numero_de_erros) + "/" + str(numero_de_erros_para_perder)
             )
     print(linha_com_numero_de_erros)
     linha_com_letras_inseridas = "Chutes:   " + " ".join(letras_inseridas)
@@ -117,9 +121,6 @@ def obter_formas_da_letra_com_acentos(letra):
 
     formas.extend(formas_somente_com_acentos)
     return formas
-
-def mostrar_mensagem_de_jogo_perdido():
-    pass
 
 def mostrar_mensagem_de_jogo_ganho(palavra_correta):
     mensagem_de_vitoria = ("\nVocê ganhou o jogo.\nA palavra é "
