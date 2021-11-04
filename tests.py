@@ -85,5 +85,6 @@ def testar_revelar_letra():
     if tem_teste_funcionando:
         print("Passou nos testes da função revelar_letra.")
 
-iniciar_testes()
+if __name__ == "__main__":
+    iniciar_testes()
 

@@ -127,7 +127,8 @@ def mostrar_mensagem_de_jogo_ganho(palavra_correta):
             + "\"" + str(palavra_correta) + "\"" + "." + "\n")
     print(mensagem_de_vitoria)
 
-deci = input("Deseja iniciar o jogo?[sim/nao]").lower()
-if deci == "sim":
-    iniciar_jogo()
+if __name__ == "__main__":
+    deci = input("Deseja iniciar o jogo?[sim/nao]").lower()
+    if deci == "sim":
+        iniciar_jogo()
 
