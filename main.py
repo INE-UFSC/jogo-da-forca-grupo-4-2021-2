@@ -103,24 +103,20 @@ def revelar_letra(letra, palavra_ocultada, palavra_correta):
     return nova_palavra_ocultada
 
 def obter_formas_da_letra_com_acentos(letra):
-    formas = [letra]
-    formas_somente_com_acentos = []
+    lista_das_formas_das_letras = [
+            ["a", "á", "à", "ã", "â"],
+            ["e", "é", "ê"],
+            ["i", "í"],
+            ["o", "ó", "õ", "ô"],
+            ["u", "ú"],
+            ["c", "ç"],
+            [letra]
+            ]
 
-    if letra == "a":
-        formas_somente_com_acentos = ["á", "à", "ã", "â"]
-    elif letra == "e":
-        formas_somente_com_acentos = ["é", "ê"]
-    elif letra == "i":
-        formas_somente_com_acentos = ["í"]
-    elif letra == "o":
-        formas_somente_com_acentos = ["ó", "õ", "ô"]
-    elif letra == "u":
-        formas_somente_com_acentos = ["ú"]
-    elif letra == "c":
-        formas_somente_com_acentos = ["ç"]
-
-    formas.extend(formas_somente_com_acentos)
-    return formas
+    for formas_da_letra in lista_das_formas_das_letras:
+        tem_formas_da_letra_procurada = letra in formas_da_letra
+        if tem_formas_da_letra_procurada:
+            return formas_da_letra
 
 def mostrar_mensagem_de_jogo_ganho(palavra_correta):
     mensagem_de_vitoria = ("\nVocê ganhou o jogo.\nA palavra é "
